@@ -19,4 +19,4 @@ Anschließend legst du mit `crontab -e` den folgenden Cronjob an (Passwort und U
 
 ## Einrichtung des Webspace
 
-Kopiere die Inhalte des Ordners `web` auf deinen Webspace und passe dabei der Passwort in der Datei `upload.php` an. Ist der Raspberry Pi korrekt eingerichtet, sollte man nach wenigen Minuten ein Diagramm sehen können.
+Kopiere die Inhalte des Ordners `web` auf deinen Webspace und passe dabei das Passwort in der Datei `upload.php` an. Ist der Raspberry Pi korrekt eingerichtet, sollte man nach wenigen Minuten ein Diagramm sehen können.
