@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="de">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes"/>
+  <title>Wetter</title>
+  <script src="moment.min.js"></script>
+  <script src="Chart.min.js"></script>
+  <script src="chartjs-plugin-datasource.min.js"></script>
+  <style>
+    canvas {
+      -moz-user-select: none;
+      -webkit-user-select: none;
+      -ms-user-select: none;
+    }
+  </style>
+</head>
+
+<body>
+    <div style="position: relative; height: 97vh; width:97vw">
+      <canvas id="chart"></canvas>
+    </div>
+
+<script>
+var config = {
+    type: 'line',
+    data: {
+        datasets: [{
+            type: 'line',
+            yAxisID: 'temperature',
+            backgroundColor: 'transparent',
+            borderColor: 'rgb(255, 99, 132)',
+            pointBackgroundColor: 'rgb(255, 99, 132)',
+            tension: 0,
+            fill: false,
+            showLine: true,
+            label: "Temperatur",
+            /*hidden: true*/
+        }, {
+            type: 'line',
+            yAxisID: 'humidity',
+            backgroundColor: 'rgba(54, 162, 235, 0.5)',
+            borderColor: 'transparent',
+            label: "rel. Luftfeuchtigkeit"
+        }]
+    },
+    plugins: [ChartDataSource],
+    options: {
+        maintainAspectRatio: false,
+        scales: {
+            yAxes: [{
+                id: 'temperature',
+                gridLines: {
+                    drawOnChartArea: false
+                }
+            }, {
+                id: 'humidity',
+                position: 'right',
+                gridLines: {
+                    drawOnChartArea: false
+                }
+            }],
+            xAxes: [{
+                type: 'time',
+                time: {
+                    parser: 'YYYY-MM-DD HH:mm:ss',
+                    unit: 'hour',
+                    stepSize: 1,
+                    displayFormats: {
+                        minutes: 'HH:mm',
+                        hour: 'HH:mm'
+                    },
+                },
+                ticks: {
+                    //autoSkip: true,
+                    //maxRotation: 90,
+                    //minRotation: 90
+                },
+            }]
+        },
+        plugins: {
+            datasource: {
+                type: 'csv',
+                url: 'wetter.log',
+                delimiter: ';',
+                rowMapping: 'index',
+                datasetLabels: false,
+                indexLabels: true
+            }
+        }
+    }
+};
+
+window.onload = function() {
+	var ctx = document.getElementById('chart').getContext('2d');
+	window.chart = new Chart(ctx, config);
+};
+</script>
+
+</body>
+</html>
