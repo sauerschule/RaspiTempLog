@@ -14,7 +14,7 @@ Anschließend legst du mit `crontab -e` den folgenden Cronjob an (Passwort und U
 
 ```
 * * * * * /home/pi/wetter.py >> /home/pi/wetter/wetter.log
-* * * * * sleep 7; tail -n 720 /home/pi/wetter/wetter.log | curl -s -F 'INSERT_PASSWORD_HERE' https://domain.tld/path/to/upload.php
+* * * * * sleep 7; tail -n 720 /home/pi/wetter/wetter.log | curl -s -F 'INSERT_PASSWORD_HERE=@-' https://domain.tld/path/to/upload.php
 ```
 
 ## Einrichtung des Webspace
